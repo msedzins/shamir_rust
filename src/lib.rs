@@ -42,7 +42,7 @@ pub fn get_shamir_secret(threshold: usize, share_amount: usize, secret: String) 
 
 //shares is a vector of strings, each string is a share
 //current limitation: the shares must be in order, starting from the first one!
-//this is because we now Y, but we don't know corresponding X
+//this is because we know Y, but we don't know corresponding X
 //the solution is to take touples of (X, Y) to recover the secret
 #[wasm_bindgen]
 pub fn recover(threshold: usize, shares: Vec<String>) -> String {
