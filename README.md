@@ -73,11 +73,11 @@ Running the tests like this ```wasm-pack test --<browser_name> --headless``` fai
 It happens not only for the custom code implemented in this repo but also for the code taken from:
 https://rustwasm.github.io/book/game-of-life/hello-world.html
 
-Reason is currently unknown. Needs to be investigated.
+The reason is currently unknown. This needs to be investigated.
 
 ## WASM size
 
-Build without any custom dependencies (just after starting implementation) had a size below 1 KB. Currently, after importing all dependencies, the size is 99KB. 
+The build without any custom dependencies (just after starting implementation) had a size below 1 KB. Currently, after importing all dependencies, the size is 99KB. 
 There is definitely a space for improvement.
 
 There is a good tutorial on this topic:
