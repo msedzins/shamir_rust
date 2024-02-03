@@ -38,7 +38,6 @@ Components:
 
 ![Step 4](images/step4.png)
 
-
 # Some interesting challanges/things to consider 
 
 TODO
