@@ -1,18 +1,25 @@
 [package]
-name = "without-a-bundler"
+name = "shamir_rust"
 version = "0.1.0"
-authors = ["The wasm-bindgen Developers"]
+authors = ["msedzinski"]
 edition = "2018"
 rust-version = "1.57"
 
 [lib]
-crate-type = ["cdylib"]
+crate-type = ["cdylib", "rlib"]
 
 [dependencies]
 hex = "0.4.3"
 num-bigint = "0.2.6"
-shamir_secret_sharing = "0.1.1"
 wasm-bindgen = "0.2.90"
+
+#shamir_secret_sharing = "0.1.1" -> uses rand in version 0.5 which doesn't support wasm-bindgen
+#the newest shamir_secret_sharing from github supports rand 0.6 but contains some bugs that cause wasm-pack compilation errors
+#the workaround is to fork the repo, take working version (0.1.1) and update for it rand "0.5" -> "0.6"
+shamir_secret_sharing = { git = "https://github.com/msedzins/verifiable-secret-sharing", branch = "rand_fixed" }
+
+# enable future in rand which is used by shamir_secret_sharing
+rand = { version = "0.6", features = ["wasm-bindgen"] }
 
 # The `console_error_panic_hook` crate provides better debugging of panics by
 # logging them with `console.error`. This is great for development, but requires
@@ -20,19 +27,12 @@ wasm-bindgen = "0.2.90"
 # code size when deploying.
 console_error_panic_hook = { version = "0.1.7", optional = true }
 
+[dev-dependencies]
+wasm-bindgen-test = "0.3.34"
+
 [features]
 default = ["console_error_panic_hook"]
 
 [profile.release]
 lto = true
 opt-level = 's'
-
-[dependencies.web-sys]
-version = "0.3.4"
-features = [
-  'Document',
-  'Element',
-  'HtmlElement',
-  'Node',
-  'Window',
-]
